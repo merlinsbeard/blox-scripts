@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>BLACKBOX</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+	<h1>Welcome to Blackbox</h1>
+	<h1>IP address 8.8.8.8</h1>
+	
+	<h2 class="page-header">File Server</h2>
+	<p class="lead">File Server can be accesed in two ways:</p>
+	<ul>
+		<li><a href="//8.8.8.8/owncloud">Owncloud</a></li>
+		<li>Samba</li>
+	</ul>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+for file in *.mkv;
+do
+	ex="${file##*.};
+	ne=$(echo "$file"|sed 's/\./\ /g'|cut -c 1-22);
+	new_name="$ne"."$ex";
+	echo $new_name;
+	sudo mv "$file" "$new_name";
+done
