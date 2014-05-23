@@ -1,0 +1,62 @@
+music_directory		"/home/blox/Music"
+playlist_directory	"/home/blox/Music/Playlists"
+db_file			"/var/lib/mpd/tag_cache"
+log_file		"/var/log/mpd/mpd.log"
+pid_file		"/run/mpd/pid"
+state_file		"/var/lib/mpd/state"
+sticker_file            "/var/lib/mpd/sticker.sql"
+###############################################################################
+# General music daemon options ################################################
+user				"mpd"
+bind_to_address		"0.0.0.0"
+auto_update    "yes"
+###############################################################################
+follow_outside_symlinks	"yes"
+follow_inside_symlinks		"yes"
+zeroconf_enabled		"yes"
+zeroconf_name			"Music Player"
+###############################################################################
+#password                        "password@read,add,control,admin"
+password			"blox@read,add,control,admin"
+#default_permissions             "read,add,control,admin"
+default_permissions		"read"
+###############################################################################
+input {
+        plugin "curl"
+#       proxy "proxy.isp.com:8080"
+#       proxy_user "user"
+#       proxy_password "password"
+}
+audio_output {
+	type		"alsa"
+	name		"My ALSA Device"
+}
+audio_output {
+	type		"fifo"
+	name		"FIFO"
+	path		"/tmp/mpd.fifo"
+	format		"44100:16:2"
+}
+audio_output {
+	type		"httpd"
+	name		"My HTTP Stream"
+#	encoder		"vorbis"		# optional, vorbis or lame
+	port		"8000"
+#	bind_to_address "0.0.0.0"               # optional, IPv4 or IPv6
+	quality		"5.0"			# do not define if bitrate is defined
+#	bitrate		"128"			# do not define if quality is defined
+	format		"44100:16:1"
+#	max_clients     "0"                     # optional 0=no limit
+}
+#
+# An example of a pulseaudio output (streaming to a remote pulseaudio server)
+#
+audio_output {
+	type		"pulse"
+	name		"My Pulse Output"
+#	server		"localhost"  # optional
+#	sink		"remote_server_sink"	# optional
+}
+mixer_type "software"
+filesystem_charset		"UTF-8"
+id3v1_encoding			"UTF-8"
