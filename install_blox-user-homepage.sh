@@ -36,10 +36,23 @@ virtualenv venv
 source venv/bin/activate
 pip install -r blox-user-homepage/requirements.txt
 
-service network-manager restart
 
 cd blox-user-homepage/static/uploads
 rm Pictures
 ln -s /home/blox/Pictures Pictures
 
+
+# add script to change the ip in website
+sudo cp ip_address_auto /etc/network/if-down.d/ip_address_auto
+cd /etc/network
+cd if-post-down.d
+sudo ln -s ../if-down.d/ip_address_auto ip_address_auto
+cd /etc/network/if-up.d
+sudo ln -s ../if-down.d/ip_address_auto ip_address_auto
+
+# Restart service to change ip in web user page
+service network-manager restart
+
+# Start the blox-user-homepage server
+cd /var/www/html/blox/blox-user-homepage
 ./start.sh
