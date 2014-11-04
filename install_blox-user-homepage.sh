@@ -1,6 +1,5 @@
 #!/bin/bash
-# Run this script as sudo
-if [ $EUID != 0]
+if [ $EUID != 0];
 then
     echo "Must run as sudo"
     exit
@@ -9,7 +8,7 @@ else
 fi
 
 echo "Now checking if blox.conf exists"
-if [! -f /etc/init/blox.conf ]
+if [ ! -f /etc/init/blox.conf ];
 then
     echo "Copying blox.conf"
     cp blox.conf /etc/init/
@@ -18,7 +17,8 @@ fi
 echo "Now Downloading blox user homepage"
 git clone https://github.com/merlinsbeard/blox-user-homepage.git
 echo "Moving blox-user-homepage.git"
-mv blox-user-homepage /var/www/html/blox
+mkdir /var/www/html/blox
+mv blox-user-homepage /var/www/html/blox/
 echo "changing mod of blox-user-homepage to blox and 775"
 cd /var/www/html/blox/
 echo "current directory" && pwd
@@ -38,5 +38,8 @@ pip install -r blox-user-homepage/requirements.txt
 
 service network-manager restart
 
-cd blox-user-homepage/
+cd blox-user-homepage/static/uploads
+rm Pictures
+ln -s /home/blox/Pictures Pictures
+
 ./start.sh
